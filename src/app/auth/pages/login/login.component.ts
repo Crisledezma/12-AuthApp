@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import  Swal  from 'sweetalert2';
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -12,8 +14,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   
   miFormulario: FormGroup = this.fb.group({
-    email: ['test2@test.com',[ Validators.required, Validators.email]],
-    password: ['123456', [Validators.required, Validators.minLength(6)]],
+    email: ['',[ Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   })
 
   constructor(
@@ -25,10 +27,14 @@ export class LoginComponent {
   login() {
     const { email, password } = this.miFormulario.value;
     this.authService.login(email, password)
-      .subscribe( resp => {
-      console.log(resp)
-    })
-    // this.router.navigateByUrl('/dashboard');
+      .subscribe(ok => {
+        console.log(ok);
+        if (ok === true) {
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          Swal.fire('Error', ok, 'error')
+        }
+      })
   }
 
 }
