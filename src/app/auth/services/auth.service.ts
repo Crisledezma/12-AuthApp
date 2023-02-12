@@ -21,7 +21,7 @@ export class AuthService {
   ) { }
 
   registro(name: string, email: string, password: string) {
-    const url: string = `${this.baseUrl}new`
+    const url: string = `${this.baseUrl}/new`
     const body = { name, email, password };
     return this.http.post<AuthResponse>(url, body)
       .pipe(
@@ -48,7 +48,7 @@ export class AuthService {
     )
   }
   validarToken(): Observable<boolean> {
-    const url = `${this.baseUrl}renew`;
+    const url = `${this.baseUrl}/renew`;
     const headers = new HttpHeaders()
       .set('x-token', localStorage.getItem('token') || '');
     return this.http.get<AuthResponse>(url, { headers } )
