@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:4000/api/auth/'
+  baseUrl: 'https://12-auth-server-production-2f2e.up.railway.app/api/auth/'
 }
